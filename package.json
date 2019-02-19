@@ -1,0 +1,19 @@
+{
+  "name": "signup-chart",
+  "version": "1.0.0",
+  "description": "signup demo for payex onboarding",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Akswii/signup_demo.git"
+  },
+  "author": "Aksel Wiig",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Akswii/signup_demo/issues"
+  },
+  "homepage": "https://github.com/Akswii/signup_demo#readme"
+}
