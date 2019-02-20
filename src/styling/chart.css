@@ -10,7 +10,9 @@
 
 .orgchart .node .title {
     background-color: var(--bg-brand);
-    border-radius: 3px;
+    border-radius: 3px 3px 0 0;
+    font-size: 16px;
+    font-weight: 400;
 }
 
 .orgchart .lines .downLine {
