@@ -664,7 +664,7 @@
       event.data.visibleNodes.removeClass('sliding');
       if (this.isInAction($node)) {
         this.switchHorizontalArrow($node);
-        $node.children('.topEdge').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+        // // $node.children('.topEdge').removeClass('fa-chevron-up').addClass('fa-chevron-down');
       }
     },
     //
@@ -737,7 +737,7 @@
     },
     //
     switchVerticalArrow: function ($arrow) {
-      $arrow.toggleClass('fa-chevron-up').toggleClass('fa-chevron-down');
+      // // // $arrow.toggleClass('fa-chevron-up').toggleClass('fa-chevron-down');
     },
     //
     switchHorizontalArrow: function ($node) {
@@ -746,24 +746,24 @@
         var $prevSib = $node.closest('table').parent().prev();
         if ($prevSib.length) {
           if ($prevSib.is('.hidden')) {
-            $node.children('.leftEdge').addClass('fa-chevron-left').removeClass('fa-chevron-right');
+            // // // $node.children('.leftEdge').addClass('fa-chevron-left').removeClass('fa-chevron-right');
           } else {
-            $node.children('.leftEdge').addClass('fa-chevron-right').removeClass('fa-chevron-left');
+            // // // $node.children('.leftEdge').addClass('fa-chevron-right').removeClass('fa-chevron-left');
           }
         }
         var $nextSib = $node.closest('table').parent().next();
         if ($nextSib.length) {
           if ($nextSib.is('.hidden')) {
-            $node.children('.rightEdge').addClass('fa-chevron-right').removeClass('fa-chevron-left');
+            // // // $node.children('.rightEdge').addClass('fa-chevron-right').removeClass('fa-chevron-left');
           } else {
-            $node.children('.rightEdge').addClass('fa-chevron-left').removeClass('fa-chevron-right');
+            // // // $node.children('.rightEdge').addClass('fa-chevron-left').removeClass('fa-chevron-right');
           }
         }
       } else {
         var $sibs = $node.closest('table').parent().siblings();
         var sibsVisible = $sibs.length ? !$sibs.is('.hidden') : false;
-        $node.children('.leftEdge').toggleClass('fa-chevron-right', sibsVisible).toggleClass('fa-chevron-left', !sibsVisible);
-        $node.children('.rightEdge').toggleClass('fa-chevron-left', sibsVisible).toggleClass('fa-chevron-right', !sibsVisible);
+        // // // $node.children('.leftEdge').toggleClass('fa-chevron-right', sibsVisible).toggleClass('fa-chevron-left', !sibsVisible);
+        // // // $node.children('.rightEdge').toggleClass('fa-chevron-left', sibsVisible).toggleClass('fa-chevron-right', !sibsVisible);
       }
     },
     //
@@ -783,17 +783,17 @@
       if (event.type === 'mouseenter') {
         if ($topEdge.length) {
           flag = this.getNodeState($node, 'parent').visible;
-          $topEdge.toggleClass('fa-chevron-up', !flag).toggleClass('fa-chevron-down', flag);
+          // // $topEdge.toggleClass('fa-chevron-up', !flag).toggleClass('fa-chevron-down', flag);
         }
         if ($bottomEdge.length) {
           flag = this.getNodeState($node, 'children').visible;
-          $bottomEdge.toggleClass('fa-chevron-down', !flag).toggleClass('fa-chevron-up', flag);
+          // // $bottomEdge.toggleClass('fa-chevron-down', !flag).toggleClass('fa-chevron-up', flag);
         }
         if ($leftEdge.length) {
           this.switchHorizontalArrow($node);
         }
       } else {
-        $node.children('.edge').removeClass('fa-chevron-up fa-chevron-down fa-chevron-right fa-chevron-left');
+        // // // // $node.children('.edge').removeClass('fa-chevron-up fa-chevron-down fa-chevron-right fa-chevron-left');
       }
     },
     //
@@ -1354,13 +1354,13 @@
     addChildren: function ($node, data) {
       this.buildChildNode($node.closest('table'), data);
       if (!$node.children('.bottomEdge').length) {
-        $node.append('<i class="edge verticalEdge bottomEdge fa"></i>');
+        // $node.append('<i class="edge verticalEdge bottomEdge fa"></i>');
       }
       if (!$node.find('.symbol').length) {
-        $node.children('.title').prepend('<i class="fa ' + this.options.parentNodeSymbol + ' symbol"></i>');
+        // $node.children('.title').prepend('<i class="fa ' + this.options.parentNodeSymbol + ' symbol"></i>');
       }
       if (this.isInAction($node)) {
-        this.switchVerticalArrow($node.children('.bottomEdge'));
+        // this.switchVerticalArrow($node.children('.bottomEdge'));
       }
     },
     // build the parent node of specific node
@@ -1381,7 +1381,7 @@
         $currentRoot.children('.title').after('<i class="edge verticalEdge topEdge fa"></i>');
       }
       if (this.isInAction($currentRoot)) {
-        this.switchVerticalArrow($currentRoot.children('.topEdge'));
+        // this.switchVerticalArrow($currentRoot.children('.topEdge'));
       }
     },
     // subsequent processing of build sibling nodes
@@ -1421,11 +1421,11 @@
       this.buildSiblingNode($node.closest('table'), data);
       $node.closest('.nodes').data('siblingsLoaded', true);
       if (!$node.children('.leftEdge').length) {
-        $node.children('.topEdge').after('<i class="edge horizontalEdge rightEdge fa"></i><i class="edge horizontalEdge leftEdge fa"></i>');
+        // $node.children('.topEdge').after('<i class="edge horizontalEdge rightEdge fa"></i><i class="edge horizontalEdge leftEdge fa"></i>');
       }
       if (this.isInAction($node)) {
-        this.switchHorizontalArrow($node);
-        $node.children('.topEdge').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+        // this.switchHorizontalArrow($node);
+        // // // $node.children('.topEdge').removeClass('fa-chevron-up').addClass('fa-chevron-down');
       }
     },
     //
