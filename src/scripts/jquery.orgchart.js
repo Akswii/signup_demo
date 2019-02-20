@@ -731,69 +731,10 @@
       this.$chart.data('inAjax', false);
       $('.oc-export-btn' + (this.options.chartClass !== '' ? '.' + this.options.chartClass : '')).prop('disabled', false);
     },
-    // whether the cursor is hovering over the node
-    isInAction: function ($node) {
-      return $node.children('.edge').attr('class').indexOf('fa-') > -1 ? true : false;
-    },
-    //
-    switchVerticalArrow: function ($arrow) {
-      // // // $arrow.toggleClass('fa-chevron-up').toggleClass('fa-chevron-down');
-    },
-    //
-    switchHorizontalArrow: function ($node) {
-      var opts = this.options;
-      if (opts.toggleSiblingsResp && (typeof opts.ajaxURL === 'undefined' || $node.closest('.nodes').data('siblingsLoaded'))) {
-        var $prevSib = $node.closest('table').parent().prev();
-        if ($prevSib.length) {
-          if ($prevSib.is('.hidden')) {
-            // // // $node.children('.leftEdge').addClass('fa-chevron-left').removeClass('fa-chevron-right');
-          } else {
-            // // // $node.children('.leftEdge').addClass('fa-chevron-right').removeClass('fa-chevron-left');
-          }
-        }
-        var $nextSib = $node.closest('table').parent().next();
-        if ($nextSib.length) {
-          if ($nextSib.is('.hidden')) {
-            // // // $node.children('.rightEdge').addClass('fa-chevron-right').removeClass('fa-chevron-left');
-          } else {
-            // // // $node.children('.rightEdge').addClass('fa-chevron-left').removeClass('fa-chevron-right');
-          }
-        }
-      } else {
-        var $sibs = $node.closest('table').parent().siblings();
-        var sibsVisible = $sibs.length ? !$sibs.is('.hidden') : false;
-        // // // $node.children('.leftEdge').toggleClass('fa-chevron-right', sibsVisible).toggleClass('fa-chevron-left', !sibsVisible);
-        // // // $node.children('.rightEdge').toggleClass('fa-chevron-left', sibsVisible).toggleClass('fa-chevron-right', !sibsVisible);
-      }
-    },
     //
     repaint: function (node) {
       if (node) {
         node.style.offsetWidth = node.offsetWidth;
-      }
-    },
-    //
-    nodeEnterLeaveHandler: function (event) {
-      var $node = $(event.delegateTarget),
-        flag = false;
-      var $topEdge = $node.children('.topEdge');
-      var $rightEdge = $node.children('.rightEdge');
-      var $bottomEdge = $node.children('.bottomEdge');
-      var $leftEdge = $node.children('.leftEdge');
-      if (event.type === 'mouseenter') {
-        if ($topEdge.length) {
-          flag = this.getNodeState($node, 'parent').visible;
-          // // $topEdge.toggleClass('fa-chevron-up', !flag).toggleClass('fa-chevron-down', flag);
-        }
-        if ($bottomEdge.length) {
-          flag = this.getNodeState($node, 'children').visible;
-          // // $bottomEdge.toggleClass('fa-chevron-down', !flag).toggleClass('fa-chevron-up', flag);
-        }
-        if ($leftEdge.length) {
-          this.switchHorizontalArrow($node);
-        }
-      } else {
-        // // // // $node.children('.edge').removeClass('fa-chevron-up fa-chevron-down fa-chevron-right fa-chevron-left');
       }
     },
     //
@@ -1261,7 +1202,6 @@
         }
       }
 
-      $nodeDiv.on('mouseenter mouseleave', this.nodeEnterLeaveHandler.bind(this));
       $nodeDiv.on('click', this.nodeClickHandler.bind(this));
       $nodeDiv.on('click', '.topEdge', this.topEdgeClickHandler.bind(this));
       $nodeDiv.on('click', '.bottomEdge', this.bottomEdgeClickHandler.bind(this));
@@ -1353,15 +1293,6 @@
     // exposed method
     addChildren: function ($node, data) {
       this.buildChildNode($node.closest('table'), data);
-      if (!$node.children('.bottomEdge').length) {
-        // $node.append('<i class="edge verticalEdge bottomEdge fa"></i>');
-      }
-      if (!$node.find('.symbol').length) {
-        // $node.children('.title').prepend('<i class="fa ' + this.options.parentNodeSymbol + ' symbol"></i>');
-      }
-      if (this.isInAction($node)) {
-        // this.switchVerticalArrow($node.children('.bottomEdge'));
-      }
     },
     // build the parent node of specific node
     buildParentNode: function ($currentRoot, data) {
@@ -1420,13 +1351,6 @@
     addSiblings: function ($node, data) {
       this.buildSiblingNode($node.closest('table'), data);
       $node.closest('.nodes').data('siblingsLoaded', true);
-      if (!$node.children('.leftEdge').length) {
-        // $node.children('.topEdge').after('<i class="edge horizontalEdge rightEdge fa"></i><i class="edge horizontalEdge leftEdge fa"></i>');
-      }
-      if (this.isInAction($node)) {
-        // this.switchHorizontalArrow($node);
-        // // // $node.children('.topEdge').removeClass('fa-chevron-up').addClass('fa-chevron-down');
-      }
     },
     //
     removeNodes: function ($node) {
