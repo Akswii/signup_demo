@@ -23,17 +23,6 @@ $(function () {
             $('#selected-node').val('');
         }
     });
-    $('input[name="chart-state"]').on('click', function () {
-        $('.orgchart').toggleClass('edit-state', this.value !== 'view');
-        $('#edit-panel').toggleClass('edit-state', this.value === 'view');
-        if ($(this).val() === 'edit') {
-            $('.orgchart').find('tr').removeClass('hidden')
-                .find('td').removeClass('hidden')
-                .find('.node').removeClass('slide-up slide-down slide-right slide-left');
-        } else {
-            $('#btn-reset').trigger('click');
-        }
-    });
     $('input[name="node-type"]').on('click', function () {
         var $this = $(this);
         if ($this.val() === 'parent') {
@@ -66,74 +55,25 @@ $(function () {
             console.log('Please input value for new node');
             return;
         }
-        var nodeType = $('input[name="node-type"]:checked');
-        if (!nodeType.length) {
-            console.log('Please select a node type');
-            return;
-        }
-        if (nodeType.val() !== 'parent' && !$('.orgchart').length) {
-            console.log(
-                'Please creat the root node firstly when you want to build up the orgchart from the scratch'
-            );
-            return;
-        }
-        if (nodeType.val() !== 'parent' && !$node) {
-            console.log('Please select one node in orgchart');
-            return;
-        }
-        if (nodeType.val() === 'parent') {
-            if (!$chartContainer.children('.orgchart').length) { // if the original chart has been deleted
-                oc = $chartContainer.orgchart({
-                    'data': {
-                        'name': nodeVals[0],
-                    },
-                    'exportButton': true,
-                    'exportFilename': 'SportsChart',
-                    'parentNodeSymbol': 'fa-th-large',
-                    'createNode': function ($node, data) {
-                        $node[0].id = getId();
-                    }
-                });
-                oc.$chart.addClass('view-state');
-            } else {
-                oc.addParent($chartContainer.find('.node:first'), {
-                    'name': nodeVals[0],
-                    'id': getId()
-                });
-            }
-        } else if (nodeType.val() === 'siblings') {
-            if ($node[0].id === oc.$chart.find('.node:first')[0].id) {
-                alert('You are not allowed to directly add sibling nodes to root node');
-                return;
-            }
-            oc.addSiblings($node, nodeVals.map(function (item) {
+        var hasChild = $node.parent().attr('colspan') > 0 ? true : false;
+        if (!hasChild) {
+            var rel = nodeVals.length > 1 ? '110' : '100';
+            oc.addChildren($node, nodeVals.map(function (item) {
                 return {
                     'name': item,
-                    'relationship': '110',
+                    'relationship': rel,
                     'id': getId()
                 };
             }));
         } else {
-            var hasChild = $node.parent().attr('colspan') > 0 ? true : false;
-            if (!hasChild) {
-                var rel = nodeVals.length > 1 ? '110' : '100';
-                oc.addChildren($node, nodeVals.map(function (item) {
+            oc.addSiblings($node.closest('tr').siblings('.nodes').find('.node:first'),
+                nodeVals.map(function (item) {
                     return {
                         'name': item,
-                        'relationship': rel,
+                        'relationship': '110',
                         'id': getId()
                     };
                 }));
-            } else {
-                oc.addSiblings($node.closest('tr').siblings('.nodes').find('.node:first'),
-                    nodeVals.map(function (item) {
-                        return {
-                            'name': item,
-                            'relationship': '110',
-                            'id': getId()
-                        };
-                    }));
-            }
         }
     });
     $('#btn-delete-nodes').on('click', function () {
