@@ -1,4 +1,23 @@
+:root {
+    --bg-brand: #2da944;
+    --line-color: #e6e7e8;
+}
+
 #chart-container .orgchart {
     background: none;
     width: 100%;
+}
+
+.orgchart .node .title {
+    background-color: var(--bg-brand);
+    border-radius: 3px;
+}
+
+.orgchart .lines .downLine {
+    background-color: var(--line-color);
+}
+
+.orgchart .lines .rightLine,
+.orgchart .lines .leftLine {
+    border-color: var(--line-color);
 }
