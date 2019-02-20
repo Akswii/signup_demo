@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/Akswii/signup_demo#readme",
   "dependencies": {
-    "d3": "^5.9.1"
+    "orgchart": "^2.1.2"
   }
 }
