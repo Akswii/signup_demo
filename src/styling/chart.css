@@ -1,6 +1,7 @@
 :root {
     --bg-brand: #2da944;
     --line-color: #e6e7e8;
+    --dark-border: #a7a9ac;
 }
 
 #chart-container .orgchart {
@@ -13,6 +14,23 @@
     border-radius: 3px 3px 0 0;
     font-size: 16px;
     font-weight: 400;
+    min-height: 1.5rem;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+}
+
+.orgchart .node .content {
+    border-color: var(--dark-border);
+    min-height: 2rem;
+    height: auto;
+    text-align: initial;
+    padding: 0.5rem;
+}
+
+.orgchart .node .content >p:not(:last-child) {
+    margin-bottom: 0.5rem;
 }
 
 .orgchart .lines .downLine {

@@ -1,7 +1,9 @@
+window._orgcharts = [];
+
 $(function () {
     var datascource = {
-        name: 'Firmanavn',
-        test: 'testverdi',
+        name: '<div class="d-flex justify-content-center align-items-center"><i class="fas fa-building mr-1"></i>Firmanavn<div>',
+        company_info: "<small>EIERANDEL</small><p>35%</p><small>ORGNR</small><p>73577357735</p>",
     };
 
     var getId = function () {
@@ -10,7 +12,7 @@ $(function () {
 
     var oc = $('#chart-container').orgchart({
         'data': datascource,
-        'nodeContent': "verdien min",
+        'nodeContent': 'company_info',
         'chartClass': 'edit-state',
         'pan': true,
         'createNode': function ($node, data) {
@@ -18,8 +20,11 @@ $(function () {
         }
     });
 
+    window._orgcharts.push(oc);
+
     oc.$chartContainer.on('click', '.node', function () {
         var $this = $(this);
+
         $('#selected-node').val($this.find('.title').text()).data('node', $this);
     });
 
@@ -31,6 +36,7 @@ $(function () {
 
     $('input[name="node-type"]').on('click', function () {
         var $this = $(this);
+
         if ($this.val() === 'parent') {
             $('#edit-panel').addClass('edit-parent-node');
             $('#new-nodelist').children(':gt(0)').remove();
@@ -45,6 +51,7 @@ $(function () {
 
     $('#btn-remove-input').on('click', function () {
         var inputs = $('#new-nodelist').children('li');
+
         if (inputs.length > 1) {
             inputs.last().remove();
         }
@@ -53,20 +60,25 @@ $(function () {
     $('#btn-add-nodes').on('click', function () {
         var $chartContainer = $('#chart-container');
         var nodeVals = [];
+
         $('#new-nodelist').find('.new-node').each(function (index, item) {
             var validVal = item.value.trim();
             if (validVal.length) {
                 nodeVals.push(validVal);
             }
         });
+
         var $node = $('#selected-node').data('node');
+
         if (!nodeVals.length) {
             console.warn('Please input value for new node');
             return;
         }
         var hasChild = $node.parent().attr('colspan') > 0 ? true : false;
+
         if (!hasChild) {
             var rel = nodeVals.length > 1 ? '110' : '100';
+
             oc.addChildren($node, nodeVals.map(function (item) {
                 return {
                     'name': item,
@@ -88,6 +100,7 @@ $(function () {
 
     $('#btn-delete-nodes').on('click', function () {
         var $node = $('#selected-node').data('node');
+
         if (!$node) {
             alert('Please select one node in orgchart');
             return;
@@ -96,6 +109,7 @@ $(function () {
                 return;
             }
         }
+
         oc.removeNodes($node);
         $('#selected-node').val('').data('node', null);
     });
