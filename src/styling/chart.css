@@ -9,6 +9,10 @@
     width: 100%;
 }
 
+.orgchart .node {
+    width: auto;
+}
+
 .orgchart .node .title {
     background-color: var(--bg-brand);
     border-radius: 3px 3px 0 0;
@@ -16,9 +20,18 @@
     font-weight: 400;
     min-height: 1.5rem;
     height: 100%;
+    padding: 0 0.5rem;
 
     display: flex;
     justify-content: center;
+}
+
+.nodes table {
+    margin: auto;
+}
+
+.orgchart .node:hover {
+    border-radius: 3px;
 }
 
 .orgchart .node .content {

@@ -2,8 +2,8 @@ window._orgcharts = [];
 
 $(function () {
     var datascource = {
-        name: '<div class="d-flex justify-content-center align-items-center"><i class="fas fa-building mr-1"></i>Firmanavn<div>',
-        company_info: "<small>EIERANDEL</small><p>35%</p><small>ORGNR</small><p>73577357735</p>",
+        name: '<div class="d-flex justify-content-center align-items-center"><i class="fas fa-building mr-1"></i>TEST BILPLEIE V/WAAGBØ<div>',
+        custom_content: "<label>ORGNR</label><p>819226032</p>",
     };
 
     var getId = function () {
@@ -12,7 +12,7 @@ $(function () {
 
     var oc = $('#chart-container').orgchart({
         'data': datascource,
-        'nodeContent': 'company_info',
+        'nodeContent': 'custom_content',
         'chartClass': 'edit-state',
         'pan': true,
         'createNode': function ($node, data) {
@@ -45,28 +45,24 @@ $(function () {
         }
     });
 
-    $('#btn-add-input').on('click', function () {
-        $('#new-nodelist').append('<li><input type="text" class="new-node"></li>');
-    });
-
-    $('#btn-remove-input').on('click', function () {
-        var inputs = $('#new-nodelist').children('li');
-
-        if (inputs.length > 1) {
-            inputs.last().remove();
-        }
-    });
-
     $('#btn-add-nodes').on('click', function () {
         var $chartContainer = $('#chart-container');
-        var nodeVals = [];
+        const $newNodelist = $("#new-nodelist");
+        const nodeVals = [];
 
-        $('#new-nodelist').find('.new-node').each(function (index, item) {
-            var validVal = item.value.trim();
-            if (validVal.length) {
-                nodeVals.push(validVal);
-            }
+        let $title = $newNodelist.find(".new-node");
+
+        $title.length ? $title.each((index, item) => {
+            $title = item.value.trim();
+        }) : null;
+
+        nodeVals.push({
+            title: $title,
+            content: testValue,
+            content2: testValue2
         });
+
+        console.table(nodeVals);
 
         var $node = $('#selected-node').data('node');
 
@@ -79,9 +75,10 @@ $(function () {
         if (!hasChild) {
             var rel = nodeVals.length > 1 ? '110' : '100';
 
-            oc.addChildren($node, nodeVals.map(function (item) {
+            oc.addChildren($node, nodeVals.map((item) => {
                 return {
-                    'name': item,
+                    'name': item.title,
+                    'custom_content': item.content,
                     'relationship': rel,
                     'id': getId()
                 };
@@ -90,7 +87,8 @@ $(function () {
             oc.addSiblings($node.closest('tr').siblings('.nodes').find('.node:first'),
                 nodeVals.map(function (item) {
                     return {
-                        'name': item,
+                        'name': item.title,
+                        'custom_content': item.content,
                         'relationship': '110',
                         'id': getId()
                     };
@@ -112,12 +110,5 @@ $(function () {
 
         oc.removeNodes($node);
         $('#selected-node').val('').data('node', null);
-    });
-
-    $('#btn-reset').on('click', function () {
-        $('.orgchart').find('.focused').removeClass('focused');
-        $('#selected-node').val('');
-        $('#new-nodelist').find('input:first').val('').parent().siblings().remove();
-        $('#node-type-panel').find('input').prop('checked', false);
     });
 });

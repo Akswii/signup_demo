@@ -1205,12 +1205,6 @@
                 }
             }
 
-            $nodeDiv.on('click', this.nodeClickHandler.bind(this));
-            $nodeDiv.on('click', '.topEdge', this.topEdgeClickHandler.bind(this));
-            $nodeDiv.on('click', '.bottomEdge', this.bottomEdgeClickHandler.bind(this));
-            $nodeDiv.on('click', '.leftEdge, .rightEdge', this.hEdgeClickHandler.bind(this));
-            $nodeDiv.on('click', '.toggleBtn', this.toggleVNodes.bind(this));
-
             if (opts.draggable) {
                 this.bindDragDrop($nodeDiv);
                 this.touchHandled = false;
