@@ -81,22 +81,6 @@
                                 <a href="#" class="sheet-close">
                                     <i class="material-icons">close</i>
                                 </a>
-                                <form>
-                                    <div class="form-group"><label for="full-name">Full name</label>
-                                        <div class="input-group"><input type="text" class="form-control" id="full-name"
-                                                placeholder="Enter your full name" /></div>
-                                        <div class="help-block">Your full name</div>
-                                    </div>
-                                    <div class="form-group"><label for="email-address">Email</label>
-                                        <div class="input-group"><input type="text" class="form-control"
-                                                id="email-address" placeholder="Enter your email" /></div>
-                                        <div class="help-block">Email means electronic mail, not express mail</div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="checkbox"><input type="checkbox" id="subscribe-checkbox" /><label
-                                                for="subscribe-checkbox">Sign up to our math newsletter</label></div>
-                                    </div><button class="btn btn-primary" type="submit">Submit</button>
-                                </form>
                             </section>
                         </div>
                         <button class="btn btn-primary" type="button" data-sheet-open="demo-sheet">+Legg til
@@ -110,12 +94,13 @@
                             <div class="form-group">
                                 <label>new node:</label>
                                 <div id="new-nodelist">
-                                    <p>Tittel: <input type="text" class="new-node"></p>
-                                    <!-- <p>Eierandel: <input type="text" class="node-andel"></p>
-                                    <p>Orgnummer: <input type="text" class="node-orgnr"></p> -->
+                                    <p>Tittel: <input type="text" class="node-title"></p>
+                                    <p>Eierandel: <input type="text" class="node-andel"></p>
+                                    <p>Orgnummer: <input type="text" class="node-orgnr"></p>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-primary" id="btn-add-nodes">+Legg til eier</button>
+                            <button type="button" class="btn btn-primary" id="btn-add-nodes">+Legg til
+                                eier</button>
                             <button type="button" class="btn btn-danger" id="btn-delete-nodes">Slett</button>
                         </div>
                     </div>
@@ -123,9 +108,24 @@
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
         <script type="text/javascript" src="./scripts/jquery.orgchart.js"></script>
         <script src="https://design.payex.com/v/2.0.1/scripts/px-script.js"></script>
         <script type="text/javascript" src="scripts/edit.js"></script>
+        <script>
+            $(function () {
+                $("#accordion").accordion({
+                    collapsible: true,
+                    active: false
+                });
+
+                console.log(window._orgcharts);
+
+                // window._orgcharts.each((index, element) => {
+                //     console.log(element.id);
+                // });
+            });
+        </script>
 </body>
 
 </html>

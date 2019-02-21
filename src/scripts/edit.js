@@ -1,9 +1,23 @@
 window._orgcharts = [];
+window._nodes = [];
 
 $(function () {
     var datascource = {
         name: '<div class="d-flex justify-content-center align-items-center"><i class="fas fa-building mr-1"></i>TEST BILPLEIE V/WAAGBØ<div>',
-        custom_content: "<label>ORGNR</label><p>819226032</p>",
+        custom_content:
+            `<div>
+                <label>ORGNR</label>
+                <p>819226032</p>
+                <div id="accordion">
+                    <div>
+                        <label class="d-block">ADRESSE</label>
+                        <p>Langlandsveien 230 </br> 7234 LER </p>
+                        <label class="d-block">LAND</label>
+                        <p>Norge</p>
+                    </div>
+                </div>
+            </div>`,
+        // custom_content: "<div id='accordion'><h5>hello</h5><div>wassap</div></div>",
     };
 
     var getId = function () {
@@ -49,20 +63,22 @@ $(function () {
         var $chartContainer = $('#chart-container');
         const $newNodelist = $("#new-nodelist");
         const nodeVals = [];
+        let $title;
+        let $eierandel;
+        let $orgnr;
 
-        let $title = $newNodelist.find(".new-node");
+        $newNodelist.find(".node-title").each((index, item) => $title = item.value.trim());
+        $newNodelist.find(".node-andel").each((index, item) => $eierandel = item.value.trim());
+        $newNodelist.find(".node-orgnr").each((index, item) => $orgnr = item.value.trim());
 
-        $title.length ? $title.each((index, item) => {
-            $title = item.value.trim();
-        }) : null;
+        // $title.length ? $title.each((index, item) => {
+        //     $title = item.value.trim();
+        // }) : null;
 
         nodeVals.push({
             title: $title,
-            content: testValue,
-            content2: testValue2
+            content: `<label>EIERANDEL</label><p>${$eierandel}</p><label>ORGNR</label><p>${$orgnr}</p>`,
         });
-
-        console.table(nodeVals);
 
         var $node = $('#selected-node').data('node');
 
@@ -70,6 +86,7 @@ $(function () {
             console.warn('Please input value for new node');
             return;
         }
+
         var hasChild = $node.parent().attr('colspan') > 0 ? true : false;
 
         if (!hasChild) {

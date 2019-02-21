@@ -42,7 +42,8 @@
     padding: 0.5rem;
 }
 
-.orgchart .node .content >p:not(:last-child) {
+.orgchart .node .content div >p:not(:last-child),
+.orgchart .node .content #accordion >p:not(:last-child) {
     margin-bottom: 0.5rem;
 }
 
