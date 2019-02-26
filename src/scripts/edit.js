@@ -76,12 +76,12 @@ $(function () {
 
         if (type === "legal") {
             nodeVals.push({
-                title: `<div class="custom-title"><h4 class="text-brand">${name}</h4><small class="badge badge-brand">${share}%</small></div>`,
+                title: `<div class="custom-title"><h4 class="text-brand">${name}</h4></div>`,
                 content: companyTemplate
             })
         } else {
             nodeVals.push({
-                title: `<div class="custom-title"><h4 class="text-brand">${name}</h4><small class="badge badge-brand">${share}%</small></div>`,
+                title: `<div class="custom-title"><h4 class="text-brand">${name}</h4></div>`,
                 content: personTemplate
             })
         }
@@ -145,7 +145,8 @@ $(() => {
         const elemAddChild = elem.find(".add-child");
         const elemBody = elem.find(".content");
 
-        elemAddChild.click(() => {
+        elemAddChild.click(event => {
+            // event.stopPropagation();
             px.sheet.open("demo-sheet");
 
             const $radioContainer = $("#ownership-form-group");
@@ -168,8 +169,8 @@ $(() => {
             });
         });
 
-        elemBody.click(() => {
-            elemBody.find(".accordion").css("display")  === "block" ? elemBody.find(".accordion").slideUp() : elemBody.find(".accordion").slideDown()
+        elem.click(() => {
+            elem.find(".first-title").length ? null : px.sheet.open("demo-edit-sheet");
         });
     };
 

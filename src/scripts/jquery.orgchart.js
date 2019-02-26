@@ -1176,9 +1176,7 @@
 
             if (opts.nodeTemplate) {
                 $nodeDiv.append(opts.nodeTemplate(data));
-                console.log("hello");
             } else {
-                console.log("hello");
                 $nodeDiv.append(data[opts.nodeTitle])
                     .append(typeof opts.nodeContent !== 'undefined' ? data[opts.nodeContent] : '');
             }
