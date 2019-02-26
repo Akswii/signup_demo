@@ -86,18 +86,26 @@
                                 <form novalidate data-validate>
                                     <div id="ownership-form-group" class="form-group">
                                         <div class="radio">
-                                            <input type="radio" name="physical-or-legal" id="physical" value="physical">
+                                            <input type="radio" name="test" id="physical" value="physical">
                                             <label for="physical" id="physical-label">Fysisk person</label>
                                         </div>
                                         <div class="radio">
-                                            <input type="radio" name="physical-or-legal" id="legal" value="legal">
+                                            <input type="radio" name="test" id="legal" value="legal">
                                             <label for="legal" id="legal-label">Juridisk person (firma)</label>
                                         </div>
                                     </div>
                                     <fieldset class="d-none" id="new-nodelist">
-                                            <div class="input-group">
+                                            <div class="input-group legal mb-3">
                                                 <span class="input-group-addon">Country</span>
                                                 <select class="node-country form-control">
+                                                    <option>Norway</option>
+                                                    <option>Sweden</option>
+                                                    <option>Denmark</option>
+                                                </select>
+                                            </div>
+                                            <div class="input-group physical mb-3">
+                                                <span class="input-group-addon">Nationality</span>
+                                                <select class="node-nationality form-control">
                                                     <option>Norway</option>
                                                     <option>Sweden</option>
                                                     <option>Denmark</option>
@@ -111,9 +119,13 @@
                                                 <label>Epost</label>
                                                 <input type="email" class="node-email form-control">
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group legal">
                                                 <label>Orgnummer</label>
                                                 <input type="number" class="node-orgnr form-control">
+                                            </div>
+                                            <div class="form-group physical">
+                                                <label>Fødselsnummer</label>
+                                                <input type="number" class="node-birthnr form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label>Adresse</label>
@@ -131,7 +143,7 @@
                                                 <label>Eierandel i prosent</label>
                                                 <input type="number" class="node-share form-control">
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group legal" id="radio-test">
                                                 <div class="radio">
                                                     <input type="radio" id="radio-example-3" name="radio-example" />
                                                     <label for="radio-example-3">Selskapet har ingen fysiske personer som direkte
@@ -159,13 +171,6 @@
         <script type="text/javascript" src="./scripts/jquery.orgchart.js"></script>
         <script src="https://design.payex.com/v/2.0.1/scripts/px-script.js"></script>
         <script type="text/javascript" src="scripts/edit.js"></script>
-        <script>
-            $(() => {
-                $("#ownership-form-group").click(() => {
-                    console.log($("#ownership-form-group").find("physical-or-legal:checked").val());
-                });
-            });
-        </script>
 </body>
 
 </html>

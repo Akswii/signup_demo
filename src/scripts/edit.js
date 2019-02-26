@@ -69,6 +69,7 @@ $(function () {
         let postnr;
         let postarea;
         let share;
+        let type;
 
         $newNodelist.find(".node-country").each((index, item) => country = item.value.trim());
         $newNodelist.find(".node-name").each((index, item) => name = item.value.trim());
@@ -155,6 +156,25 @@ $(() => {
 
         elemAddChild.click(() => {
             px.sheet.open("demo-sheet");
+
+            const $radioContainer = $("#ownership-form-group");
+            const $fieldset = $("#new-nodelist");
+            const $legal = $("#new-nodelist .legal");
+            const $physical = $("#new-nodelist .physical");
+
+            $radioContainer.find(".radio input").click(() =>  {
+                let val = $radioContainer.find("input[name='test']:checked").val();
+
+                if (val === "legal") {
+                    $physical.addClass("d-none");
+                    $legal.removeClass("d-none");
+                } else if (val === "physical") {
+                    $legal.addClass("d-none");
+                    $physical.removeClass("d-none");
+                }
+
+                $fieldset.removeClass("d-none");
+            });
         });
 
         elemBody.click(() => {
