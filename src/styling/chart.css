@@ -13,6 +13,10 @@
     width: auto;
 }
 
+.orgchart .node .accordion {
+    display: none;
+}
+
 .orgchart .node .title {
     background-color: var(--bg-brand);
     border-radius: 3px 3px 0 0;
@@ -24,6 +28,7 @@
 
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .nodes table {
@@ -42,7 +47,11 @@
     padding: 0.5rem;
 }
 
-.orgchart .node .content div >p:not(:last-child),
+.orgchart .node .content p {
+    margin-bottom: 0.5rem;
+}
+
+.orgchart .node .content div div >p:not(:last-child),
 .orgchart .node .content #accordion >p:not(:last-child) {
     margin-bottom: 0.5rem;
 }
@@ -54,4 +63,8 @@
 .orgchart .lines .rightLine,
 .orgchart .lines .leftLine {
     border-color: var(--line-color);
+}
+
+.edit-node {
+    margin-left: 1rem;
 }

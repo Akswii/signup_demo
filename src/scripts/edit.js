@@ -1,23 +1,19 @@
-window._orgcharts = [];
-window._nodes = [];
+window._nodeIds = [];
 
 $(function () {
     var datascource = {
-        name: '<div class="d-flex justify-content-center align-items-center"><i class="fas fa-building mr-1"></i>TEST BILPLEIE V/WAAGBØ<div>',
+        name: '<span>TEST BILPLEIE V/WAAGBØ</span><i class="material-icons material-icons-tiny edit-node">edit</i><i class="material-icons add-child">add</i>',
         custom_content:
             `<div>
                 <label>ORGNR</label>
                 <p>819226032</p>
-                <div id="accordion">
-                    <div>
-                        <label class="d-block">ADRESSE</label>
-                        <p>Langlandsveien 230 </br> 7234 LER </p>
-                        <label class="d-block">LAND</label>
-                        <p>Norge</p>
-                    </div>
+                <div class="accordion">
+                    <label class="d-block">ADRESSE</label>
+                    <p>Langlandsveien 230 </br> 7234 LER </p>
+                    <label class="d-block">LAND</label>
+                    <p>Norge</p>
                 </div>
             </div>`,
-        // custom_content: "<div id='accordion'><h5>hello</h5><div>wassap</div></div>",
     };
 
     var getId = function () {
@@ -29,22 +25,23 @@ $(function () {
         'nodeContent': 'custom_content',
         'chartClass': 'edit-state',
         'pan': true,
-        'createNode': function ($node, data) {
-            $node[0].id = getId();
+        'createNode': ($node, data) => {
+            const id = getId();
+            $node[0].id = id;
+
+            window._nodeIds.push(id);
         }
     });
-
-    window._orgcharts.push(oc);
 
     oc.$chartContainer.on('click', '.node', function () {
         var $this = $(this);
 
-        $('#selected-node').val($this.find('.title').text()).data('node', $this);
+        $('#selected-node').text($this.find('.title span').text()).data('node', $this);
     });
 
     oc.$chartContainer.on('click', '.orgchart', function (event) {
         if (!$(event.target).closest('.node').length) {
-            $('#selected-node').val('');
+            $('#selected-node').text('');
         }
     });
 
@@ -63,21 +60,38 @@ $(function () {
         var $chartContainer = $('#chart-container');
         const $newNodelist = $("#new-nodelist");
         const nodeVals = [];
-        let $title;
-        let $eierandel;
-        let $orgnr;
 
-        $newNodelist.find(".node-title").each((index, item) => $title = item.value.trim());
-        $newNodelist.find(".node-andel").each((index, item) => $eierandel = item.value.trim());
-        $newNodelist.find(".node-orgnr").each((index, item) => $orgnr = item.value.trim());
+        let country;
+        let name;
+        let email;
+        let orgnr;
+        let address;
+        let postnr;
+        let postarea;
+        let share;
 
-        // $title.length ? $title.each((index, item) => {
-        //     $title = item.value.trim();
-        // }) : null;
-
+        $newNodelist.find(".node-country").each((index, item) => country = item.value.trim());
+        $newNodelist.find(".node-name").each((index, item) => name = item.value.trim());
+        $newNodelist.find(".node-email").each((index, item) => email = item.value.trim());
+        $newNodelist.find(".node-orgnr").each((index, item) => orgnr = item.value.trim());
+        $newNodelist.find(".node-address").each((index, item) => address = item.value.trim());
+        $newNodelist.find(".node-postnr").each((index, item) => postnr = item.value.trim());
+        $newNodelist.find(".node-postarea").each((index, item) => postarea = item.value.trim());
+        $newNodelist.find(".node-share").each((index, item) => share = item.value.trim());
+        
         nodeVals.push({
-            title: $title,
-            content: `<label>EIERANDEL</label><p>${$eierandel}</p><label>ORGNR</label><p>${$orgnr}</p>`,
+            title: `<span>${name}</span><i class="material-icons material-icons-tiny edit-node">edit</i><i class="material-icons add-child">add</i>`,
+            content:
+                `<label>EIERANDEL</label>
+                <p>${share}</p>
+                <div class="accordion">
+                    <label>ORGNR</label>
+                    <p>${orgnr}</p>
+                    <label>ADDRESS</label>
+                    <p>${address}</p>
+                    <label>Country</label>
+                    <p>${country}</p>
+                </div>`
         });
 
         var $node = $('#selected-node').data('node');
@@ -90,19 +104,20 @@ $(function () {
         var hasChild = $node.parent().attr('colspan') > 0 ? true : false;
 
         if (!hasChild) {
-            var rel = nodeVals.length > 1 ? '110' : '100';
+            const rel = nodeVals.length > 1 ? '110' : '100';
+            const id = getId();
 
-            oc.addChildren($node, nodeVals.map((item) => {
+            const test = oc.addChildren($node, nodeVals.map((item) => {
                 return {
                     'name': item.title,
                     'custom_content': item.content,
                     'relationship': rel,
-                    'id': getId()
+                    'id': id
                 };
             }));
         } else {
             oc.addSiblings($node.closest('tr').siblings('.nodes').find('.node:first'),
-                nodeVals.map(function (item) {
+                nodeVals.map((item) => {
                     return {
                         'name': item.title,
                         'custom_content': item.content,
@@ -126,6 +141,33 @@ $(function () {
         }
 
         oc.removeNodes($node);
-        $('#selected-node').val('').data('node', null);
+        $('#selected-node').text('').data('node', null);
+    });
+});
+
+$(() => {
+    const getElem = id => ($(`#${id}`));
+
+    const addListener = id => {
+        const elem = getElem(id);
+        const elemAddChild = elem.find(".title .add-child");
+        const elemBody = elem.find(".content");
+
+        elemAddChild.click(() => {
+            px.sheet.open("demo-sheet");
+        });
+
+        elemBody.click(() => {
+            elemBody.find(".accordion").css("display")  === "block" ? elemBody.find(".accordion").slideUp() : elemBody.find(".accordion").slideDown()
+        });
+    };
+
+    window._nodeIds.forEach(id => {
+        addListener(id);
+    });
+
+    $("#btn-add-nodes").click(() => {
+        addListener(window._nodeIds[window._nodeIds.length - 1]);
+        px.sheet.close("demo-sheet");
     });
 });

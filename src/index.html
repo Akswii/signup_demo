@@ -61,7 +61,7 @@
                                 selskapet.
                             </p>
                             <form action="#">
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <div class="radio">
                                         <input type="radio" id="radio-example-1" name="radio-example" />
                                         <label for="radio-example-1">Selskapet har ingen fysiske personer som direkte
@@ -69,11 +69,11 @@
                                             kapitalen eller stemmerettene i selskapet</label>
                                     </div>
                                     <div class="radio">
-                                        <input type="radio" id="radio-example-2" name="radio-example" />
+                                        <input type="radio" id="radio-example-2" name="radio-example" checked />
                                         <label for="radio-example-2">Selskapet eies helt eller delvis av en eller flere
                                             fysiske eller juridiske personer</label>
                                     </div>
-                                </div>
+                                </div> -->
                             </form>
                         </div>
                         <div class="sheet" id="demo-sheet">
@@ -81,28 +81,75 @@
                                 <a href="#" class="sheet-close">
                                     <i class="material-icons">close</i>
                                 </a>
+                                <h3 id="selected-node" class="selected-node-group text-brand"></h3>
+                                <h4 class="text-brand">Legg til eier</h4>
+                                <form novalidate data-validate>
+                                    <div id="ownership-form-group" class="form-group">
+                                        <div class="radio">
+                                            <input type="radio" name="physical-or-legal" id="physical" value="physical">
+                                            <label for="physical" id="physical-label">Fysisk person</label>
+                                        </div>
+                                        <div class="radio">
+                                            <input type="radio" name="physical-or-legal" id="legal" value="legal">
+                                            <label for="legal" id="legal-label">Juridisk person (firma)</label>
+                                        </div>
+                                    </div>
+                                    <fieldset class="d-none" id="new-nodelist">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Country</span>
+                                                <select class="node-country form-control">
+                                                    <option>Norway</option>
+                                                    <option>Sweden</option>
+                                                    <option>Denmark</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Navn</label>
+                                                <input type="text" class="node-name form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Epost</label>
+                                                <input type="email" class="node-email form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Orgnummer</label>
+                                                <input type="number" class="node-orgnr form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Adresse</label>
+                                                <input type="adress" class="node-address form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Postnummer</label>
+                                                <input type="number" class="node-postnr form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Poststed</label>
+                                                <input type="text" class="node-postarea form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Eierandel i prosent</label>
+                                                <input type="number" class="node-share form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="radio">
+                                                    <input type="radio" id="radio-example-3" name="radio-example" />
+                                                    <label for="radio-example-3">Selskapet har ingen fysiske personer som direkte
+                                                        eller indirekte innehar 25% eller mer av eierandelene, kontrollen,
+                                                        kapitalen eller stemmerettene i selskapet</label>
+                                                </div>
+                                                <div class="radio">
+                                                    <input type="radio" id="radio-example-4" name="radio-example" />
+                                                    <label for="radio-example-4">Selskapet eies helt eller delvis av en eller flere
+                                                        fysiske eller juridiske personer</label>
+                                                </div>
+                                            </div>
+                                        <button type="button" class="btn btn-primary mb-5" id="btn-add-nodes">+Legg til eier</button>
+                                    </fieldset>
+                                </form>
                             </section>
                         </div>
-                        <button class="btn btn-primary" type="button" data-sheet-open="demo-sheet">+Legg til
-                            eier</button>
                         <div id="chart-container"></div>
-                        <div>
-                            <div class="form-group">
-                                <label class="selected-node-group mr-2">selected node: </label>
-                                <input type="text" id="selected-node" class="selected-node-group">
-                            </div>
-                            <div class="form-group">
-                                <label>new node:</label>
-                                <div id="new-nodelist">
-                                    <p>Tittel: <input type="text" class="node-title"></p>
-                                    <p>Eierandel: <input type="text" class="node-andel"></p>
-                                    <p>Orgnummer: <input type="text" class="node-orgnr"></p>
-                                </div>
-                            </div>
-                            <button type="button" class="btn btn-primary" id="btn-add-nodes">+Legg til
-                                eier</button>
-                            <button type="button" class="btn btn-danger" id="btn-delete-nodes">Slett</button>
-                        </div>
                     </div>
                 </section>
             </div>
@@ -113,17 +160,10 @@
         <script src="https://design.payex.com/v/2.0.1/scripts/px-script.js"></script>
         <script type="text/javascript" src="scripts/edit.js"></script>
         <script>
-            $(function () {
-                $("#accordion").accordion({
-                    collapsible: true,
-                    active: false
+            $(() => {
+                $("#ownership-form-group").click(() => {
+                    console.log($("#ownership-form-group").find("physical-or-legal:checked").val());
                 });
-
-                console.log(window._orgcharts);
-
-                // window._orgcharts.each((index, element) => {
-                //     console.log(element.id);
-                // });
             });
         </script>
 </body>
