@@ -12,35 +12,60 @@
 .orgchart .node {
     min-width: 10rem;
     width: auto;
+    position: relative;
+    margin: 0 0.5rem 1.5rem;
+
+    border: 1px solid var(--line-color);
+    border-radius: 3px;
+    padding: 1rem;
 }
 
-.orgchart .node .accordion {
-    display: none;
+.orgchart .node .add-child {
+    content: "+";
+    color: var(--dark-border);
+    font-size: 1.5rem;
+    position: absolute;
+    line-height: 1rem;
+    bottom: -1.25rem;
+    left: 0;
+    right: 0;
 }
 
-.orgchart .node .title {
-    background-color: var(--bg-brand);
-    border-radius: 3px 3px 0 0;
-    font-size: 16px;
-    font-weight: 400;
-    min-height: 1.5rem;
-    height: 100%;
-    padding: 0 0.5rem;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.orgchart .node .custom-title {
+.orgchart .node .custom-title,
+.orgchart .node .first-title {
     display: flex;
     justify-content: center;
     justify-items: center;
     margin: 0;
+    align-items: center;
 }
 
-.orgchart .node .custom-title h4 {
-    margin: 0 0 0 0.5rem;
+.orgchart .node .custom-title h4,
+.orgchart .node .first-title  h4{
+    margin: 0 0.5rem;
+    flex-grow: 1;
+}
+
+.orgchart .node .custom-title .badge,
+.orgchart .node .first-title .badge {
+    line-height: 1;
+    padding: 0.125rem 0.25rem;
+}
+
+.orgchart .node .first-title {
+    margin: -1rem;
+    padding: 0.5rem;
+    border-radius: 3px;
+    color: white;
+    background-color: var(--bg-brand);
+}
+
+.orgchart .node .first-title h4 {
+    color: white;
+}
+
+.orgchart .node .badge {
+    margin: 0;
 }
 
 .nodes table {
@@ -49,23 +74,6 @@
 
 .orgchart .node:hover {
     border-radius: 3px;
-}
-
-.orgchart .node .content {
-    border-color: var(--dark-border);
-    min-height: 2rem;
-    height: auto;
-    text-align: initial;
-    padding: 0.5rem;
-}
-
-.orgchart .node .content p {
-    margin-bottom: 0.5rem;
-}
-
-.orgchart .node .content div div >p:not(:last-child),
-.orgchart .node .content #accordion >p:not(:last-child) {
-    margin-bottom: 0.5rem;
 }
 
 .orgchart .lines .downLine {

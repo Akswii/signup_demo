@@ -2,19 +2,16 @@ window._nodeIds = [];
 
 $(function () {
     var datascource = {
-        name: '<div class="custom-title"><i class="material-icons">domain</i><h4 class="text-brand">TEST BILPLEIE V/WAAGBØ</h4></div>',
-        custom_content:
-            `<div>
-                <label>ORGNR</label>
-                <p>819226032</p>
-                <div class="accordion">
-                    <label class="d-block">ADRESSE</label>
-                    <p>Langlandsveien 230 </br> 7234 LER </p>
-                    <label class="d-block">LAND</label>
-                    <p>Norge</p>
-                </div>
-            </div>`,
+        name: '<div class="first-title"><h4>TEST BILPLEIE V/WAAGBØ</h4></div>',
+        custom_content: '<i class="material-icons add-child">add</i>',
     };
+
+    // <div class="accordion">
+    //                 <label class="d-block">ADRESSE</label>
+    //                 <p>Langlandsveien 230 </br> 7234 LER </p>
+    //                 <label class="d-block">LAND</label>
+    //                 <p>Norge</p>
+    //             </div>
 
     var getId = function () {
         return (new Date().getTime()) * 1000 + Math.floor(Math.random() * 1001);
@@ -74,37 +71,17 @@ $(function () {
         const postarea = $newNodelist.find(".node-postarea").val();
         const share = $newNodelist.find(".node-share").val();
 
-        const personTemplate = `
-            <label>EIERANDEL</label>
-            <p>${share}</p>
-            <div class="accordion">
-                <label>Fødselsnummer</label>
-                <p>${orgnr}</p>
-                <label>Adresse</label>
-                <p>${address}</p>
-                <label>Nasjonalitet</label>
-                <p>${country}</p>
-            </div>`;
-        const companyTemplate =`
-            <label>EIERANDEL</label>
-            <p>${share}</p>
-            <div class="accordion">
-                <label>ORGNR</label>
-                <p>${orgnr}</p>
-                <label>Adresse</label>
-                <p>${address}</p>
-                <label>Land</label>
-                <p>${country}</p>
-            </div>`;
+        const personTemplate = `<span class="d-flex mt-2"><i class="material-icons mr-2">person</i>${birthnr}</span>`;
+        const companyTemplate =`<span class="d-flex mt-2"><i class="material-icons mr-2">domain</i>${orgnr}</span><i class="material-icons add-child">add</i>`;
 
         if (type === "legal") {
             nodeVals.push({
-                title: `<i class="material-icons">domain</i><span>${name}</span>`,
+                title: `<div class="custom-title"><h4 class="text-brand">${name}</h4><small class="badge badge-brand">${share}%</small></div>`,
                 content: companyTemplate
             })
         } else {
             nodeVals.push({
-                title: `<i class="material-icons">person</i<span>${name}</span>`,
+                title: `<div class="custom-title"><h4 class="text-brand">${name}</h4><small class="badge badge-brand">${share}%</small></div>`,
                 content: personTemplate
             })
         }
