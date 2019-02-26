@@ -1176,9 +1176,11 @@
 
             if (opts.nodeTemplate) {
                 $nodeDiv.append(opts.nodeTemplate(data));
+                console.log("hello");
             } else {
-                $nodeDiv.append('<div class="title">' + data[opts.nodeTitle] + '</div>')
-                    .append(typeof opts.nodeContent !== 'undefined' ? '<div class="content">' + (data[opts.nodeContent] || '') + '</div>' : '');
+                console.log("hello");
+                $nodeDiv.append(data[opts.nodeTitle])
+                    .append(typeof opts.nodeContent !== 'undefined' ? data[opts.nodeContent] : '');
             }
             //
             var nodeData = $.extend({}, data);

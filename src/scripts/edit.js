@@ -2,7 +2,7 @@ window._nodeIds = [];
 
 $(function () {
     var datascource = {
-        name: '<span>TEST BILPLEIE V/WAAGBØ</span><i class="material-icons material-icons-tiny edit-node">edit</i><i class="material-icons add-child">add</i>',
+        name: '<div class="custom-title"><i class="material-icons">domain</i><h4 class="text-brand">TEST BILPLEIE V/WAAGBØ</h4></div>',
         custom_content:
             `<div>
                 <label>ORGNR</label>
@@ -60,40 +60,54 @@ $(function () {
         var $chartContainer = $('#chart-container');
         const $newNodelist = $("#new-nodelist");
         const nodeVals = [];
-
-        let country;
-        let name;
-        let email;
-        let orgnr;
-        let address;
-        let postnr;
-        let postarea;
-        let share;
-        let type;
-
-        $newNodelist.find(".node-country").each((index, item) => country = item.value.trim());
-        $newNodelist.find(".node-name").each((index, item) => name = item.value.trim());
-        $newNodelist.find(".node-email").each((index, item) => email = item.value.trim());
-        $newNodelist.find(".node-orgnr").each((index, item) => orgnr = item.value.trim());
-        $newNodelist.find(".node-address").each((index, item) => address = item.value.trim());
-        $newNodelist.find(".node-postnr").each((index, item) => postnr = item.value.trim());
-        $newNodelist.find(".node-postarea").each((index, item) => postarea = item.value.trim());
-        $newNodelist.find(".node-share").each((index, item) => share = item.value.trim());
         
-        nodeVals.push({
-            title: `<span>${name}</span><i class="material-icons material-icons-tiny edit-node">edit</i><i class="material-icons add-child">add</i>`,
-            content:
-                `<label>EIERANDEL</label>
-                <p>${share}</p>
-                <div class="accordion">
-                    <label>ORGNR</label>
-                    <p>${orgnr}</p>
-                    <label>ADDRESS</label>
-                    <p>${address}</p>
-                    <label>Country</label>
-                    <p>${country}</p>
-                </div>`
-        });
+        const type = $("#ownership-form-group").find("input[name='legal-physical']:checked").val();
+
+        const country = $newNodelist.find(".node-country").val();
+        const nationality = $newNodelist.find(".node-nationality").val();
+        const name = $newNodelist.find(".node-name").val();
+        const email = $newNodelist.find(".node-email").val();
+        const orgnr = $newNodelist.find(".node-orgnr").val();
+        const birthnr = $newNodelist.find(".node-birthnr").val();
+        const address = $newNodelist.find(".node-address").val();
+        const postnr = $newNodelist.find(".node-postnr").val();
+        const postarea = $newNodelist.find(".node-postarea").val();
+        const share = $newNodelist.find(".node-share").val();
+
+        const personTemplate = `
+            <label>EIERANDEL</label>
+            <p>${share}</p>
+            <div class="accordion">
+                <label>Fødselsnummer</label>
+                <p>${orgnr}</p>
+                <label>Adresse</label>
+                <p>${address}</p>
+                <label>Nasjonalitet</label>
+                <p>${country}</p>
+            </div>`;
+        const companyTemplate =`
+            <label>EIERANDEL</label>
+            <p>${share}</p>
+            <div class="accordion">
+                <label>ORGNR</label>
+                <p>${orgnr}</p>
+                <label>Adresse</label>
+                <p>${address}</p>
+                <label>Land</label>
+                <p>${country}</p>
+            </div>`;
+
+        if (type === "legal") {
+            nodeVals.push({
+                title: `<i class="material-icons">domain</i><span>${name}</span>`,
+                content: companyTemplate
+            })
+        } else {
+            nodeVals.push({
+                title: `<i class="material-icons">person</i<span>${name}</span>`,
+                content: personTemplate
+            })
+        }
 
         var $node = $('#selected-node').data('node');
 
@@ -151,7 +165,7 @@ $(() => {
 
     const addListener = id => {
         const elem = getElem(id);
-        const elemAddChild = elem.find(".title .add-child");
+        const elemAddChild = elem.find(".add-child");
         const elemBody = elem.find(".content");
 
         elemAddChild.click(() => {
@@ -163,7 +177,7 @@ $(() => {
             const $physical = $("#new-nodelist .physical");
 
             $radioContainer.find(".radio input").click(() =>  {
-                let val = $radioContainer.find("input[name='test']:checked").val();
+                let val = $radioContainer.find("input[name='legal-physical']:checked").val();
 
                 if (val === "legal") {
                     $physical.addClass("d-none");

@@ -10,6 +10,7 @@
 }
 
 .orgchart .node {
+    min-width: 10rem;
     width: auto;
 }
 
@@ -29,6 +30,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.orgchart .node .custom-title {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    margin: 0;
+}
+
+.orgchart .node .custom-title h4 {
+    margin: 0 0 0 0.5rem;
 }
 
 .nodes table {
@@ -66,5 +78,10 @@
 }
 
 .edit-node {
-    margin-left: 1rem;
+    margin-left: 0.5rem;
+    cursor: pointer;
+}
+
+.add-child {
+    cursor: pointer;
 }
