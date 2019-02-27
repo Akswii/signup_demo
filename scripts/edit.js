@@ -67,32 +67,34 @@ $(function () {
         const postarea = $newNodelist.find(".node-postarea").val();
         const share = $newNodelist.find(".node-share").val();
 
+        const companyType = $newNodelist.find("input[name='add-child']:checked").val();
+
         const personTemplate = `
             <span class="d-flex mt-2">
                 <i class="material-icons mr-2">face</i>
-                ${birthnr}
+                ${birthnr || "73577357735"}
             </span>`;
         const companyTemplate =`
             <span class="d-flex mt-2">
                 <i class="material-icons mr-2">domain</i>
-                ${orgnr}
+                ${orgnr || "73577357735"}
             </span>
-            <i class="material-icons add-child">add</i>`;
+            ${companyType === "children" ?  '<i class="material-icons add-child">add</i>' : ""}`;
 
         if (type === "legal") {
             nodeVals.push({
                 title: `
                     <div class="custom-title">
-                        <h4 class="text-brand">${name}</h4>
+                        <h4 class="text-brand">${name || "Testing"}</h4>
                     </div>
                     <i class="material-icons delete-node">close</i>`,
                 content: companyTemplate
             })
-        } else if (type === "physical"){
+        } else if (type === "physical") {
             nodeVals.push({
                 title: `
                     <div class="custom-title">
-                        <h4 class="text-brand">${name}</h4>
+                        <h4 class="text-brand">${name || "Testing"}</h4>
                     </div>
                     <i class="material-icons delete-node">close</i>`,
                 content: personTemplate
