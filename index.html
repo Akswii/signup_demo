@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://design.payex.com/v/2.0.1/styles/px.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/orgchart/2.1.3/css/jquery.orgchart.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styling/chart.css" />
+    <title>Signup</title>
+</head>
+
+<body>
+    <header class="topbar">
+        <a href="#" class="topbar-logo"></a>
+    </header>
+    <div class="container" style="height: calc(150vh)">
+        <div class="row">
+            <div class="col">
+                <div class="steps mt-3">
+                    <ol>
+                        <li class="steps-completed">
+                            <div class="material-icons steps-icon">check</div>
+                            Firmaoppslag
+                        </li>
+                        <li class="steps-completed">
+                            <div class="material-icons steps-icon">check</div>
+                            Registrering
+                        </li>
+                        <li class="steps-ongoing">Kundekontroll</li>
+                        <li>Signering</li>
+                    </ol>
+                    <div class="steps-responsive">
+                        <div class="steps-responsive-text">Step 3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row h-100">
+            <div class="col">
+                <section class="panel panel-default">
+                    <header>
+                        <h2 class="panel-title">Kundekontroll</h2>
+                    </header>
+                    <div class="panel-body w-100">
+                        <p>
+                            Hvitvaskingsloven krever at vi innhenter en del informasjon om våre kunder for å sikre at
+                            våre tjenester ikke benyttes til hvitvasking eller terrorfinansiering.
+                            Dette innbærer blant annet at vi må skaffe oss kunnskap om hvordan selskapet kontrolleres
+                            og hvem som tjener penger på det.
+                        </p>
+                        <div>
+                            <h3 class="text-brand">Reelle rettighetshavere</h3>
+                            <p>
+                                Med reell rettighetshaver menes en eier (fysisk person) som direkte eller indirekte
+                                innehar 25% eller mer av eierandelene, kontrollen, kapitalen eller stemmerettene i
+                                selskapet.
+                            </p>
+                            <form action="#">
+                                <div class="form-group">
+                                    <div class="radio">
+                                        <input type="radio" id="radio-example-1" name="radio-example" />
+                                        <label for="radio-example-1">Selskapet har ingen fysiske personer som direkte
+                                            eller indirekte innehar 25% eller mer av eierandelene, kontrollen,
+                                            kapitalen eller stemmerettene i selskapet</label>
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" id="radio-example-2" name="radio-example" checked />
+                                        <label for="radio-example-2">Selskapet eies helt eller delvis av en eller flere
+                                            fysiske eller juridiske personer</label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="sheet" id="demo-sheet">
+                            <section>
+                                <a href="#" class="sheet-close">
+                                    <i class="material-icons">close</i>
+                                </a>
+                                <h3 id="selected-node" class="selected-node-group text-brand"></h3>
+                                <h4 class="text-brand">Legg til eier</h4>
+                                <form novalidate data-validate>
+                                    <div id="ownership-form-group" class="form-group">
+                                        <div class="radio">
+                                            <input type="radio" name="legal-physical" id="physical" value="physical">
+                                            <label for="physical" id="physical-label">Fysisk person</label>
+                                        </div>
+                                        <div class="radio">
+                                            <input type="radio" name="legal-physical" id="legal" value="legal">
+                                            <label for="legal" id="legal-label">Juridisk person (firma)</label>
+                                        </div>
+                                    </div>
+                                    <fieldset class="d-none" id="new-nodelist">
+                                            <div class="input-group legal mb-3">
+                                                <span class="input-group-addon">Country</span>
+                                                <select class="node-country form-control">
+                                                    <option>Norway</option>
+                                                    <option>Sweden</option>
+                                                    <option>Denmark</option>
+                                                </select>
+                                            </div>
+                                            <div class="input-group physical mb-3">
+                                                <span class="input-group-addon">Nationality</span>
+                                                <select class="node-nationality form-control">
+                                                    <option>Norway</option>
+                                                    <option>Sweden</option>
+                                                    <option>Denmark</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Navn</label>
+                                                <input type="text" class="node-name form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Epost</label>
+                                                <input type="email" class="node-email form-control">
+                                            </div>
+                                            <div class="form-group legal">
+                                                <label>Orgnummer</label>
+                                                <input type="number" class="node-orgnr form-control">
+                                            </div>
+                                            <div class="form-group physical">
+                                                <label>Fødselsnummer</label>
+                                                <input type="text" class="node-birthnr form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Adresse</label>
+                                                <input type="text" class="node-address form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Postnummer</label>
+                                                <input type="number" class="node-postnr form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Poststed</label>
+                                                <input type="text" class="node-postarea form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Eierandel i prosent</label>
+                                                <input type="number" class="node-share form-control">
+                                            </div>
+                                            <div class="form-group legal" id="radio-test">
+                                                <div class="radio">
+                                                    <input type="radio" id="radio-example-3" name="radio-example" />
+                                                    <label for="radio-example-3">Selskapet har ingen fysiske personer som direkte
+                                                        eller indirekte innehar 25% eller mer av eierandelene, kontrollen,
+                                                        kapitalen eller stemmerettene i selskapet</label>
+                                                </div>
+                                                <div class="radio">
+                                                    <input type="radio" id="radio-example-4" name="radio-example" />
+                                                    <label for="radio-example-4">Selskapet eies helt eller delvis av en eller flere
+                                                        fysiske eller juridiske personer</label>
+                                                </div>
+                                            </div>
+                                        <button type="button" class="btn btn-primary mb-5" id="btn-add-nodes">Lagre</button>
+                                    </fieldset>
+                                </form>
+                            </section>
+                        </div>
+                        <div class="sheet" id="demo-edit-sheet">
+                            <section>
+                                <a href="#" class="sheet-close">
+                                    <i class="material-icons">close</i>
+                                </a>
+                                <h2>Sheet component</h2>
+                                <p>Edit sheet info</p>
+                            </section>
+                        </div>
+                        <div id="chart-container"></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="./scripts/jquery.orgchart.js"></script>
+        <script src="https://design.payex.com/v/2.0.1/scripts/px-script.js"></script>
+        <script type="text/javascript" src="scripts/edit.js"></script>
+</body>
+
+</html>
