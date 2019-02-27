@@ -4,7 +4,8 @@
   "description": "signup demo for payex onboarding",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "gh-pages -d src"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/Akswii/signup_demo#readme",
   "dependencies": {
+    "gh-pages": "^2.0.1",
     "orgchart": "^2.1.2"
   }
 }
