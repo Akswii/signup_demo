@@ -34,6 +34,8 @@
     bottom: -1.25rem;
     left: 0;
     right: 0;
+
+    margin: 0 45%;
 }
 
 .orgchart .node .custom-title,
@@ -42,12 +44,24 @@
     cursor: default;
 }
 
+.orgchart .node .delete-node {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    color: var(--dark-border);
+}
+
 .orgchart .node .first-title {
     margin: -1rem;
     padding: 1rem;
     border-radius: 3px;
 }
 
+.orgchart .node .custom-title h4 {
+    margin-right: 1.5rem;
+}
+
+.orgchart .node .custom-title h4,
 .orgchart .node .first-title h4 {
     color: var(--bg-brand);
     margin-bottom: 0;
